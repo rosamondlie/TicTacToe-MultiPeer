@@ -146,7 +146,13 @@ extension MPConnectionManager: MCSessionDelegate {
             DispatchQueue.main.async {
                 switch gameMove.action {
                 case .start:
-                    break
+                    guard let playerName = gameMove.playerName else { return }
+                    if self.game?.player1.name == playerName {
+                        self.game?.player1.isCurrent = true
+                    } else {
+                        self.game?.player2.isCurrent = true
+                    }
+        
                 case .move:
                     if let index = gameMove.index {
                         self.game?.makeMove(at: index)
@@ -162,15 +168,15 @@ extension MPConnectionManager: MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        <#code#>
+        
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        <#code#>
+        
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: (any Error)?) {
-        <#code#>
+        
     }
     
     
